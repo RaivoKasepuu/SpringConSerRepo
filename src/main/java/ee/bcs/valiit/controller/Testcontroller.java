@@ -29,20 +29,20 @@ public class Testcontroller {
     }
 
     @GetMapping(value = "/employee/{id}")
-    public Employee getEmployeeByID(@RequestParam("id") int id) {
+    public Employee getEmployeeByID(@PathVariable int id) {
         System.out.println("Get " + id);
         return employees.get(id);
     }
 
     @PutMapping("/employee/{id}")
-    public void changeEmployee(@RequestBody Employee employee, @RequestParam("id") int id) {
+    public void changeEmployee(@RequestBody Employee employee, @PathVariable int id) {
         employees.set(id, employee);
         System.out.println("set " + id);
 
     }
 
     @DeleteMapping("/employee/{id}")
-    public void deleteEmployeeByID(@RequestParam("id") int id) {
+    public void deleteEmployeeByID(@PathVariable int id) {
         System.out.println("Delete");
         employees.remove(id);
     }
