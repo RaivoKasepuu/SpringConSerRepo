@@ -16,32 +16,32 @@ import static ee.bcs.valiit.controller.Lesson3Hard.morseCode;
 @RestController
 public class Testcontroller {
 
-    @GetMapping(value = "/employees")
+    @GetMapping("employees")
     public List<Employee> getAllEmployees() {
         System.out.println("List");
         return employees;
     }
 
-    @PostMapping(value = "/employee")
+    @PostMapping("employee")
     public void addEmployee(@RequestBody Employee employee) {
         System.out.println("Post");
         employees.add(employee);
     }
 
-    @GetMapping(value = "/employee/{id}")
+    @GetMapping(value ="employee/{id}")
     public Employee getEmployeeByID(@PathVariable int id) {
         System.out.println("Get " + id);
         return employees.get(id);
     }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("employee/{id}")
     public void changeEmployee(@RequestBody Employee employee, @PathVariable int id) {
         employees.set(id, employee);
         System.out.println("set " + id);
 
     }
 
-    @DeleteMapping("/employee/{id}")
+    @DeleteMapping("employee/{id}")
     public void deleteEmployeeByID(@PathVariable int id) {
         System.out.println("Delete");
         employees.remove(id);
