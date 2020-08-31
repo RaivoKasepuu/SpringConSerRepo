@@ -1,11 +1,11 @@
 package ee.bcs.valiit.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import static ee.bcs.valiit.controller.Lesson3.sumarray;
 import static ee.bcs.valiit.controller.Lesson3.summa;
@@ -15,6 +15,45 @@ import static ee.bcs.valiit.controller.Lesson3Hard.morseCode;
 
 @RestController
 public class Testcontroller {
+
+    @GetMapping(value = "/employees")
+    public List<Employee> getAllEmployees() {
+        System.out.println("List");
+        return employees;
+    }
+
+    @PostMapping(value = "/employee")
+    public void addEmployee(@RequestBody Employee employee) {
+        System.out.println("Post");
+        employees.add(employee);
+    }
+
+    @GetMapping(value = "/employee/{id}")
+    public Employee getEmployeeByID(@RequestParam("id") int id) {
+        System.out.println("Get " + id);
+        return employees.get(id);
+    }
+
+    @PutMapping("/employee/{id}")
+    public void changeEmployee(@RequestBody Employee employee, @RequestParam("id") int id) {
+        employees.set(id, employee);
+        System.out.println("set " + id);
+
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public void deleteEmployeeByID(@RequestParam("id") int id) {
+        System.out.println("Delete");
+        employees.remove(id);
+    }
+
+
+
+
+
+
+
+    private static final List<Employee> employees = new ArrayList<>();
 
     public static int fibonacci(int x) {
         // TODO tagasta x fibonacci
@@ -29,6 +68,24 @@ public class Testcontroller {
         } else {
             return 0;
         }
+    }
+
+    @GetMapping(value = "/friends")
+    public Friends dtoTests() {
+        Friends friends = new Friends();
+        friends.setName("Albert");
+        friends.setAddress("Kapa-Kohila");
+        return friends;
+
+        // http://localhost:8080/friends
+    }
+
+    @PostMapping("/friends")
+    public void postTests(@RequestBody Friends friends) {
+        System.out.println(friends.getName());
+        System.out.println(friends.getAddress());
+
+        // http://localhost:8080/friends
     }
 
     @GetMapping(value = "/fibonacci")

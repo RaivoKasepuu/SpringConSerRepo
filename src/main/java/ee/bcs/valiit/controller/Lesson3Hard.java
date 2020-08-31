@@ -18,6 +18,7 @@ public class Lesson3Hard {
         // System.out.println(morseCode("Tere, Siim Rebane"));
         //System.out.println(fibonacci(8));
         //System.out.println(evenFibonacci(45));
+        System.out.println(fibonacciOld(9));
 
     }
 
@@ -186,7 +187,6 @@ public class Lesson3Hard {
                 f1 = f2;
                 f2 = f3;
             }
-
         }
         return fibonacci;
     }

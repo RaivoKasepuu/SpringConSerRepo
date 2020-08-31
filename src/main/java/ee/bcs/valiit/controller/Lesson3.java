@@ -1,16 +1,18 @@
 package ee.bcs.valiit.controller;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 public class Lesson3 {
 
     public static void main(String[] args) {
         //System.out.println(factorial(0));
-        System.out.println(summa(2,3));
+        //System.out.println(summa(2,3));
         // System.out.println(reverseString("llort"));
         //System.out.println(isPrime(1));
-        //int[] marks = {1, 2, 3, 4};
-        //System.out.println(sum(sort(marks)));
+        int[] marks = {7, 2, 6, 4};
+        System.out.println(Arrays.toString(sort(marks)));
+           
     }
 
 
@@ -46,6 +48,15 @@ public class Lesson3 {
         // TODO sorteeri massiiv suuruse järgi
         // Näiteks {2, 6, 8, 1}
         // Väljund {1, 2, 6, 8}
+        Arrays.sort(a);
+        //System.out.println(Arrays.toString(a));
+        return a;
+    }
+
+    public static int[] oldSort(int[] a) {
+        // TODO sorteeri massiiv suuruse järgi
+        // Näiteks {2, 6, 8, 1}
+        // Väljund {1, 2, 6, 8}
 
         int counter = 0;
         int[] result = new int[a.length];
@@ -61,6 +72,8 @@ public class Lesson3 {
 
         return result;
     }
+
+
 
     public static String reverseString(String a) {
         // TODO tagasta string tagurpidi
