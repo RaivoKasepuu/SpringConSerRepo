@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -151,18 +152,26 @@ public class BankController {
             jdbcTemplate.update("UPDATE bank_accounts SET balance = :new2balance WHERE (account_number = :toaccount)", paramMap);
 
         } else {
-            //keeldume withdraw-st
-            System.out.println("Amount on bankAccount < withdraw request");
+            //keeldume transferist
+            System.out.println("Amount on bankAccount < transfer request");
         }
 
-        System.out.println("From account balance after transfer: " + jdbcTemplate.queryForObject("SELECT balance FROM bank_accounts WHERE (account_number = :account)",
+        System.out.println("From account balance after transfer request: " + jdbcTemplate.queryForObject("SELECT balance FROM bank_accounts WHERE (account_number = :account)",
                 paramMap, Integer.class));
-        System.out.println("To account balance after transfer: " + jdbcTemplate.queryForObject("SELECT balance FROM bank_accounts WHERE (account_number = :toaccount)",
+        System.out.println("To account balance after transfer request: " + jdbcTemplate.queryForObject("SELECT balance FROM bank_accounts WHERE (account_number = :toaccount)",
                 paramMap, Integer.class));
         System.out.println("****************************************");
-
-
     }
+
+    @GetMapping("allaccounts")
+    public List<Account> getAllAccounts() {
+
+        String sql = "SELECT * FROM bank_accounts ";
+        List<Account> accounts = jdbcTemplate.query(sql, new HashMap<>(), new AccountRowMapper());
+        //System.out.println(accounts.toString());
+        return accounts;
+    }
+
 
 
 
