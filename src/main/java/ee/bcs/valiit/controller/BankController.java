@@ -56,9 +56,6 @@ public class BankController {
     public Integer getAccount(@PathVariable String accountNumber) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("account", accountNumber);
-// SQL injection
-// EE123'); DROP TABLE bank_accounts; --,
-// SELECT balance FROM bank_accounts WHERE (account_number = 'EE123');
         Integer balance = jdbcTemplate.queryForObject("SELECT balance FROM bank_accounts WHERE (account_number = :account)",
                 paramMap, Integer.class);
 
@@ -119,8 +116,6 @@ public class BankController {
         System.out.println("****************************************");
     }
 
-
-
     @PostMapping("transfer/{accountNumber},{toAccountNumber}")
     public void btMoney(@PathVariable String accountNumber, @RequestBody Integer amount, @PathVariable String toAccountNumber) {
         // http://localhost:8080/bankTransfer/1111,100,1112 case sensitive!!!!
@@ -171,44 +166,5 @@ public class BankController {
         //System.out.println(accounts.toString());
         return accounts;
     }
-
-
-
-
-/*
-
-    @GetMapping("employees")
-    public List<Employee> getAllEmployees() {
-        System.out.println("List");
-        return employees;
-    }
-
-    @PostMapping("employee")
-    public void addEmployee(@RequestBody Employee employee) {
-        System.out.println("Post");
-        employees.add(employee);
-    }
-
-    @GetMapping(value ="employee/{id}")
-    public Employee getEmployeeByID(@PathVariable int id) {
-        System.out.println("Get " + id);
-        return employees.get(id);
-    }
-
-    @PutMapping("employee/{id}")
-    public void changeEmployee(@RequestBody Employee employee, @PathVariable int id) {
-        employees.set(id, employee);
-        System.out.println("set " + id);
-
-    }
-
-    @DeleteMapping("employee/{id}")
-    public void deleteEmployeeByID(@PathVariable int id) {
-        System.out.println("Delete");
-        employees.remove(id);
-    }
-
-*/
-
 
 }

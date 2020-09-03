@@ -11,7 +11,7 @@ public class AccountRowMapper implements RowMapper<Account> {
     public Account mapRow(ResultSet resultSet, int i) throws SQLException {
         Account account = new Account();
         account.setAccountNumber(resultSet.getString("account_number"));
-        account.setAmount(resultSet.getInt("balance"));
+        account.setAccountBalance(resultSet.getBigDecimal("balance"));
         account.setId(resultSet.getInt("id"));
         account.setClient_id(resultSet.getInt("client_id"));
         return account;

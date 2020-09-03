@@ -1,15 +1,17 @@
 package ee.bcs.valiit.controller;
 
+import java.math.BigDecimal;
+
 public class Account {
     private Integer id;
     private String accountNumber;
-    private Integer amount;
+    private BigDecimal accountBalance;
     private Integer client_id;
 
-    public Account(Integer id, String accountNumber, Integer amount, Integer client_id) {
+    public Account(Integer id, String accountNumber, BigDecimal accountBalance, Integer client_id) {
         this.id = id;
         this.accountNumber = accountNumber;
-        this.amount = amount;
+        this.accountBalance = accountBalance;
         this.client_id = client_id;
     }
 
@@ -47,11 +49,11 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public BigDecimal getAccountBalance() {
+        return accountBalance;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setAccountBalance(BigDecimal accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }
