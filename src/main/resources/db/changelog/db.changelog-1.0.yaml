@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: raivo_2020_09_04
+      author: raivo
+      changes:
+        - createTable:
+            tableName: bank_customers
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  autoIncrement: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: personal_code
+                  type: int
+        - createTable:
+            tableName: bank_accounts
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: client_id
+                  type: text
+                  autoIncrement: false
+                  constraints:
+                    foreignKeyName: fk_client_id
+                    nullable: false
+                    references: bank_customers(id)
+              - column:
+                  name: account_number
+                  type: text
+                  autoIncrement: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: int
+                  autoIncrement: false
+                  constraints:
+                    nullable: false
+                    autoIncrement: false

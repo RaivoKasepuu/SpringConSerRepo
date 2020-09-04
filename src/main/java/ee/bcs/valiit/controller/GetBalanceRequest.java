@@ -3,6 +3,7 @@ package ee.bcs.valiit.controller;
 import java.math.BigDecimal;
 
 public class GetBalanceRequest {
+    /*
     String accountNumber;
     BigDecimal balance;
 
@@ -21,4 +22,6 @@ public class GetBalanceRequest {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
+     */
 }

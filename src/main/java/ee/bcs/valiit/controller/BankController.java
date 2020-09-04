@@ -13,11 +13,38 @@ public class BankController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("createaccount/{accountNumber}")
-    public void createAccount(@PathVariable String accountNumber) {
-        accountService.createAccount(accountNumber);
+    @PostMapping("createrandomaccount/")
+
+    public void createAccount() {
+        int randomAccountNumber = (int) ((Math.random() * 5000) + 1000 );
+        String accountNumber = Integer.toString(randomAccountNumber);
+        int id = 1;
+        accountService.createAccount(accountNumber, id);
     }
 
+
+        @PostMapping("createaccount/{accountNumber}")
+        public void createAccount(@PathVariable String accountNumber, @RequestBody Integer id) {
+            accountService.createAccount(accountNumber, id);
+        }
+    /*
+        @PostMapping("createnewaccount/{name}")
+        public void createAccount(@PathVariable String name) {
+            // kontrolline, kas bank_customer tabelis on selline nimi olemas
+
+            // kui olemas, siis teeme konto 0 rahaga
+            // kui ei ole klient, teeme uue kliendi
+
+            // genereerime automaatse kontonumbri
+
+            accountService.createAccount(name);
+        }
+    */
+    @PostMapping("createcustomer/{name}")
+    public void createCustomer(@PathVariable String name) {
+        int randomPersonalCode = (int) ((Math.random() * 500) + 100);
+        accountService.createCustomer(name,randomPersonalCode);
+    }
 
     @GetMapping("getbalance/{accountNumber}")
     public BigDecimal getBalance(@PathVariable String accountNumber) {

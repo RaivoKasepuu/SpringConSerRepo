@@ -1,7 +1,7 @@
 package ee.bcs.valiit.controller;
 
 import java.math.BigDecimal;
-
+// Siim Rebase transferi kraam
 
     public class TransferMoneyRequest {
         private String fromAccount;
