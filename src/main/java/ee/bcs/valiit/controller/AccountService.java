@@ -28,27 +28,32 @@ public class AccountService {
     }
 
     public BigDecimal getAccountBalance(String accountNumber) {
+        System.out.println("AccountService getAccountBalance " + accountNumber);
         BigDecimal accountBalance = accountRepository.getBalance(accountNumber);
         history("", accountNumber, "balance request");
         return accountBalance;
     }
 
     public void makeDeposit(String accountNumber, BigDecimal deposit) {
+        System.out.println("AccountService makeDeposit accountNumber: "+ accountNumber + " deposit: " + deposit);
         accountRepository.updateBalance(accountNumber, accountRepository.getBalance(accountNumber).add(deposit));
         history("", accountNumber, "deposit made: "+ deposit);
     }
 
     public void createAccount(String accountNumber, Integer id) {
+        System.out.println("AccountService createAccount accountNumber: " + accountNumber + " id: " + id);
         accountRepository.createAccount(accountNumber, id);
         history("",accountNumber, "account created");
     }
 
     public void createCustomer(String name, Integer personalId) {
+        System.out.println("AccountService createCustomer name: " + name + " personalId: " + personalId);
         accountRepository.createCustomer(name, personalId);
-        history(name,"", "customer created");
+        //history(name,"", "customer created");
     }
 
     public void makeWithdraw(String accountNumber, BigDecimal withdraw) {
+        System.out.println("AccountService makeWithdraw accountNumber: " + accountNumber + " withdraw: " + withdraw);
         int check = accountRepository.getBalance(accountNumber).compareTo(withdraw);
         if (check >= 0) {
             accountRepository.updateBalance(accountNumber, accountRepository.getBalance(accountNumber).subtract(withdraw));
@@ -59,12 +64,13 @@ public class AccountService {
     }
 
     public void makeTransferService(String accountFrom, String accountTo, BigDecimal amountToTransfer) {
+        System.out.println("AccountService makeTransferService accountFrom: " + accountFrom + " accountTo: " + accountTo + " amountToTransfer: "+ amountToTransfer);
         int check = accountRepository.getBalance(accountFrom).compareTo(amountToTransfer);
         if (check >= 0) {
             accountRepository.updateBalance(accountFrom, accountRepository.getBalance(accountFrom).subtract(amountToTransfer));
             accountRepository.updateBalance(accountTo, accountRepository.getBalance(accountTo).add(amountToTransfer));
             history("", accountFrom, "transfer to " + accountTo + ", amount: " + amountToTransfer);
-            history("",accountTo, "transfer from " + accountFrom+ ", amount: " + amountToTransfer);
+
         } else {
             System.out.println("Transfer request > account balance");
         }
@@ -72,13 +78,15 @@ public class AccountService {
     }
 
     public List<Account> getAllBalancesService() {
+        System.out.println("AccountService getAllBalancesService");
         history("Superman","all accounts", "balance request");
         return accountRepository.getAllBalances();
     }
 
     public void history(String name, String account , String action) {
         String time = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-        accountRepository.historyUpdate(time, name, account, action);
+        Integer accountId = accountRepository.getIdBasedAccountNumber(account);
+        accountRepository.historyUpdate(time,accountId,name, account, action);
 
     }
 }

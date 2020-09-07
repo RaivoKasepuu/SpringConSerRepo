@@ -17,10 +17,12 @@
             <column name="id" autoIncrement="true" type="INTEGER">
                 <constraints unique="true" primaryKey="true"/>
             </column>
-            <column name="bank_customers_id" type="INTEGER">
+            <column name="bank_customer_id" type="INTEGER">
                 <constraints foreignKeyName="fk_client_id" references="bank_customer(id)"/>
             </column>
-            <column name="account_number" type="TEXT"/>
+            <column name="account_number" type="TEXT">
+                <constraints unique="true"/>
+            </column>
             <column name="balance" type="INTEGER"/>
         </createTable>
 
@@ -31,7 +33,11 @@
             <column name="time" type="TEXT">
 
             </column>
-            <column name="account" type="TEXT"/>
+            <column name="account_id" type="INTEGER">
+                <constraints foreignKeyName="fk_account_id" references="bank_account(id)"/>
+            </column>
+            <column name="account_number" type="TEXT">
+            </column>
             <column name="name" type="TEXT"/>
             <column name="action" type="TEXT"/>
         </createTable>
