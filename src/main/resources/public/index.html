@@ -2,15 +2,277 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PornHUB 2.0</title>
+    <title>United Sperm Bank</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>PornHUB 2.0</h1>
-<h2>PornHUB 2.0</h2>
-<h3>PornHUB 2.0</h3>
-<h4>PornHUB 2.0</h4>
-<h5>PornHUB 2.0</h5>
-<h6>PornHUB 2.0</h6>
-<img src="image.jpg"/>
-</body>
-</html>
+<table>
+    <thead></thead>
+    <tr><h1> UNITED SPERM BANK </h1></tr>
+    <tr><h3> Sponsored by PornHUB 2.0 </h3></tr>
+</table>
+<table>
+
+    <tr><h2> CREATE CUSTOMER</h2></tr>
+    <tr>
+        <td>Insert customer name:</td>
+        <td><input id="insertName" placeholder="Insert name"></td>
+        <td><input type="button" class="button button4" id="create_customer" value="Create customer"></inputbutton></td>
+        <td><span id="createMessages"></span></td>
+    </tr>
+
+</table>
+
+<table>
+    <tr><h2> CREATE ACCOUNT</h2></tr>
+    <tr>
+        <td>Insert account number:</td>
+        <td><input id="insertAccountNumber" placeholder="Insert account number"></td>
+        <td><input type="button" class="button button5" id="create_account" value="Create account"></inputbutton></td>
+        <td><span id="createAccountMessages"></span></td>
+    </tr>
+</table>
+
+
+<table>
+    <tr><h2> GET BALANCE</h2></tr>
+    <tr>
+        <td>Insert account number:</td>
+        <td><input id="getAccount" placeholder="Account Number"></td>
+        <td><input type="button" class="button button2" id="get_balance" value="Get Balance"></inputbutton></td>
+        <td><span id="messages"></span></td>
+    </tr>
+</table>
+<table>
+    <tr><h2> MAKE DEPOSIT</h2></tr>
+    <tr>
+        <td>Make deposit:</td>
+        <td><input id="depositAmount" placeholder="amount in dollars"></td>
+        <td>to account number:</td>
+        <td><input id="makeDepositAccount" placeholder="Account Number"></td>
+        <td><input type="button" class="button" id="make_deposit" value="Make deposit"></inputbutton></td>
+        <td><span id="depositMessages"></span></td>
+    </tr>
+
+</table>
+<table>
+    <tr><h2> MAKE WITHDRAW</h2></tr>
+    <tr>
+        <td>Make withdraw:</td>
+        <td><input id="withdrawAmount" placeholder="amount in dollars"></td>
+        <td>from account number:</td>
+        <td><input id="makeWithdrawAccount" placeholder="Account Number"></td>
+        <td><input type="button" class="button button3" id="make_withdraw" value="Make withdraw"></inputbutton></td>
+        <td><span id="withdrawMessages"></span></td>
+    </tr>
+
+</table>
+
+<table>
+    <tr><h2> MAKE TRANSFER</h2></tr>
+    <tr>
+        <td>Make transfer:</td>
+        <td><input id="transferAmount" placeholder="amount in dollars"></td>
+        <td>from account number:</td>
+        <td><input id="transferFromAccount" placeholder="From Account Number"></td>
+        <td>to account number:</td>
+        <td><input id="transferToAccount" placeholder="To Account Number"></td>
+        <td><input type="button" class="button button6" id="make_transfer" value="Make transfer"></inputbutton></td>
+        <td><span id="transferMessages"></span></td>
+    </tr>
+
+</table>
+
+<script>
+
+    //
+    //<input id="getaccount" placeholder="Account Number">
+    //  <span id="messages"></span>
+    //<input type="button" id="get_balance" value="Get Balance"></inputbutton>
+    //
+    // CREATE CUSTOMER
+    let buttonCustomer = document.getElementById("create_customer");
+    buttonCustomer.addEventListener('click', function () {
+        let customerMessages = document.getElementById("customerMessages");
+        let name = document.getElementById("insertName");
+        let url = "/createcustomer/" + name.value;
+        // alert(url);
+        fetch(url, {
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonData) {
+
+                customerMessages.innerText = "Customer is: " + jsonData;
+                //   updateBoard();
+            })
+            .catch(function (err) {
+                customerMessages.innerText = 'Midagi on pekkis' + "  url: " + url;
+            });
+    });
+
+    // CREATE ACCOUNT
+    let buttonAccount = document.getElementById("create_account");
+    buttonAccount.addEventListener('click', function () {
+        let createAccountMessages = document.getElementById("createAccountMessages");
+        let createAccountNumber = document.getElementById("insertAccountNumber");
+        let url = "/createaccount/" + createAccountNumber.value;
+        // alert(url);
+        fetch(url, {
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonData) {
+
+                createAccountMessages.innerText = "Account is: " + jsonData;
+                //   updateBoard();
+            })
+            .catch(function (err) {
+                createAccountMessages.innerText = 'Midagi on pekkis' + "  url: " + url;
+            });
+    });
+
+
+    // GET BALANCE
+    let buttonBalance = document.getElementById("get_balance");
+    buttonBalance.addEventListener('click', function () {
+        let messages = document.getElementById("messages");
+        let account = document.getElementById("getAccount");
+        let url = "/getbalance/" + account.value;
+        // alert(url);
+        fetch(url, {
+            method: 'GET',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonData) {
+
+                messages.innerText = "Balance is: " + jsonData;
+                //   updateBoard();
+            })
+            .catch(function (err) {
+                messages.innerText = 'Midagi on pekkis' + "  url: " + url;
+            });
+    });
+
+    // MAKE WITHDRAW
+    let buttonWithdraw = document.getElementById("make_withdraw");
+    buttonWithdraw.addEventListener('click', function () {
+        let withdrawMessages = document.getElementById("withdrawMessages");
+        let withdrawAmount = document.getElementById("withdrawAmount");
+        let withdrawAccount = document.getElementById("makeWithdrawAccount");
+        let withdraw = withdrawAmount.value;
+        let url = "/makewithdraw/" + withdrawAccount.value;
+        alert(url);
+        fetch(url, {
+            method: 'PUT',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                withdraw
+            })
+
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonData) {
+
+                withdrawMessages.innerText = "Done" + jsonData;
+                //   updateBoard();
+            })
+            .catch(function (err) {
+                withdraw.innerText = 'Midagi on pekkis' + "  url: " + url;
+            });
+    });
+
+    // MAKE DEPOSIT
+    let buttonDeposit = document.getElementById("make_deposit");
+    buttonDeposit.addEventListener('click', function () {
+        let depositMessages = document.getElementById("depositMessages");
+        let depositAmount = document.getElementById("depositAmount");
+        let depositAccount = document.getElementById("makeDepositAccount");
+        let deposit = depositAmount.value;
+        let url = "/makedeposit/" + depositAccount.value;
+        alert(url);
+        fetch(url, {
+            method: 'PUT',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                deposit
+            })
+
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonData) {
+
+                depositMessages.innerText = "Done" + jsonData;
+                //   updateBoard();
+            })
+            .catch(function (err) {
+                depositMessages.innerText = 'Midagi on pekkis' + "  url: " + url;
+            });
+    });
+
+    // MAKE TRANSFER
+    let buttonTransfer = document.getElementById("make_transfer");
+    buttonTransfer.addEventListener('click', function () {
+        let transferMessages = document.getElementById("transferMessages");
+        let transferAmount = document.getElementById("transferAmount");
+        let transferFromAccount = document.getElementById("transferFromAccount");
+        let transferToAccount = document.getElementById("transferToAccount");
+        let transfer = transferAmount.value;
+        let url = "/maketransfer/" + transferFromAccount.value + transferToAccount.value;
+        alert(url);
+        fetch(url, {
+            method: 'PUT',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                transfer
+            })
+
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonData) {
+
+                transferMessages.innerText = "Done" + jsonData;
+                //   updateBoard();
+            })
+            .catch(function (err) {
+                transferMessages.innerText = 'Midagi on pekkis' + "  url: " + url;
+            });
+    });
+
+
+</script>
+<body/>
+<html/>
