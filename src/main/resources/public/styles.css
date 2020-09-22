@@ -16,6 +16,15 @@ h3 {
     font-family: verdana;
     font-size: 70%;
 }
+
+.accountboard {
+    color: darkorchid;
+    font-family: verdana;
+    font-size: 120%;
+}
+
+
+
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -34,6 +43,7 @@ h3 {
 .button4 {background-color: #fd6a02;} /* Orange - Tiger */
 .button5 {background-color: #555555;} /* Black */
 .button6 {background-color: #7f00ff;} /* Violet */
+.button7 {background-color: #008080;} /* Teal */
 .button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }

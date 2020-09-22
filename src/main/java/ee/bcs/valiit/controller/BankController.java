@@ -53,7 +53,17 @@ public class BankController {
     public BigDecimal getBalance(@PathVariable String accountNumber) {
         System.out.println("BankController getBalance accountNumber: " + accountNumber);
         return accountService.getAccountBalance(accountNumber);
+      //  return accountService.getBalance(accountNumber);
     }
+
+    @GetMapping("getjpabalance/{accountNumber}")
+    public Integer getJpaBalance(@PathVariable String accountNumber) {
+        System.out.println("BankController getBalance accountNumber: " + accountNumber);
+        // return accountService.getAccountBalance(accountNumber);
+        return accountService.getBalance(accountNumber);
+    }
+
+
 
     @PutMapping("makedeposit/{accountNumber}")
     public void makeDeposit(@PathVariable String accountNumber, @RequestBody BigDecimal deposit) {
@@ -77,6 +87,7 @@ public class BankController {
 
     @GetMapping("getallaccounts")
     public List<Account> getAllBalances() {
+        // List<Account> üles tagastusse
         System.out.println("BankController getAllBalances");
         return accountService.getAllBalancesService();
     }

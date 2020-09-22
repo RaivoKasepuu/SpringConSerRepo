@@ -12,6 +12,15 @@ import java.util.List;
 public class AccountService {
 
     @Autowired
+    private BankAccountRepository bankAccountRepository;
+
+    public Integer getBalance(String accountNumber) {
+        BankAccount result = bankAccountRepository.getByAccountNumber(accountNumber);
+        System.out.println("getBalance läbi BankAccountRepository (JPA)");
+        return result.getBalance();
+    }
+
+    @Autowired
     private AccountRepository accountRepository;
 
     public void transferMoney(String fromAccount,
@@ -78,8 +87,9 @@ public class AccountService {
     }
 
     public List<Account> getAllBalancesService() {
+        // List<Account> üles tagastusse
         System.out.println("AccountService getAllBalancesService");
-        history("Superman","all accounts", "balance request");
+        // siin jama, sest läheb ID kallale repository-s history("Superman","all accounts", "balance request");
         return accountRepository.getAllBalances();
     }
 

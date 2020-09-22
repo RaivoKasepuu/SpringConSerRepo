@@ -1,11 +1,10 @@
 package ee.bcs.valiit.controller;
 
-import liquibase.pro.packaged.S;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import java.math.BigDecimal;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +47,7 @@ public class AccountRepository {
     }
 
     public void createAccount(String accountNumber, Integer id) {
-        System.out.println("AccountRepository createAccount account: "+accountNumber + " id: " + id );
+        System.out.println("AccountRepository createAccount account: " + accountNumber + " id: " + id);
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("account_number", accountNumber);
         paramMap.put("bank_customer_id", id);
@@ -65,11 +64,11 @@ public class AccountRepository {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("account_number", accountNumber);
         String sql = "SELECT id FROM bank_account WHERE account_number= :account_number";
-        System.out.println("Id = " + jdbcTemplate.queryForObject(sql, paramMap, Integer.class));
+        System.out.println("Requested Id is: " + jdbcTemplate.queryForObject(sql, paramMap, Integer.class));
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
-    public void historyUpdate (String time, Integer accountId, String name, String account, String action) {
+    public void historyUpdate(String time, Integer accountId, String name, String account, String action) {
         System.out.println("AccountRepository historyUpdate ");
         System.out.print(" time: " + time);
         System.out.print(" accountId: " + accountId);
@@ -81,7 +80,7 @@ public class AccountRepository {
         paramMap.put("accountId", accountId);
         paramMap.put("name", name);
         paramMap.put("account", account);
-        paramMap.put("action",action);
+        paramMap.put("action", action);
 
         String sql = "INSERT INTO history (time, account_id, name, account_number, action) values (" +
                 ":time, " +
@@ -94,6 +93,7 @@ public class AccountRepository {
 
 
     public List<Account> getAllBalances() {
+        // List<Account> üles tagastusse
         System.out.println("AccountRepository getAllBalances");
         String sql = "SELECT * FROM bank_account ";
         List<Account> accounts = jdbcTemplate.query(sql, new HashMap<>(), new AccountRowMapper());
